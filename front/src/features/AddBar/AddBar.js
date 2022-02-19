@@ -1,12 +1,12 @@
 import React from 'react'
 
 const AddBar = (props) => { 
+  const handleClick = (e) => {
+  }
   return (<div className='AddBar'>
-    <form>
       <input type="text" name="nombreInput" placeholder='Nombre' />
       <input type="text" name="descrInput" placeholder='Descripción' />
-      <button>Crear</button>
-    </form>
+      <button onClick={handleClick}>Crear</button>
   </div>)
 }
 export default AddBar
