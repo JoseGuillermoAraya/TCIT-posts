@@ -11,7 +11,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   return response.json()
 })
 export const createPost = createAsyncThunk('posts/createPost', async (body) => {
-  const response = await fetch(apiPath, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body })
+  const response = await fetch(apiPath, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body:JSON.stringify(body) })
   return response.json();
 })
 export const selectAllPosts = state => state.posts.posts
@@ -19,7 +19,8 @@ export const selectAllPosts = state => state.posts.posts
 const postSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
@@ -33,8 +34,9 @@ const postSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
       })
-      .addCase(createPost.fulfilled, (state, action) => {})
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.status='idle'
+      })
   }
 })
-
 export default postSlice.reducer
