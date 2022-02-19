@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchPosts, selectAllPosts } from './postSlice';
+import { deletePost, fetchPosts, selectAllPosts } from './postSlice';
 import './Posts.css';
 
 const PostsDisplay = (props) => {
@@ -19,7 +19,7 @@ const PostsDisplay = (props) => {
   posts.forEach((p,idx) => {
     grid.push(<div className={`cell row${p.id}`} key={`name${p.id}`}>{p.nombre}</div>)
     grid.push(<div className={`cell row${p.id}`} key={`descr${p.id}`}>{p.descripcion}</div>)
-    grid.push(<button className={`eliminarButton row${p.id}`} key={`button${p.id}`}>Eliminar</button>)
+    grid.push(<button className={`eliminarButton row${p.id}`} key={`button${p.id}`} onClick={()=>dispatch(deletePost({id:p.id}))}>Eliminar</button>)
   }
 )
   return (<div className="postDisplayContainer">

@@ -14,6 +14,10 @@ export const createPost = createAsyncThunk('posts/createPost', async (body) => {
   const response = await fetch(apiPath, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body:JSON.stringify(body) })
   return response.json();
 })
+export const deletePost = createAsyncThunk('posts/deletePost', async (body) => {
+  const response = await fetch(apiPath, { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body:JSON.stringify(body) })
+  return response.json();
+})
 export const selectAllPosts = state => state.posts.posts
 
 const postSlice = createSlice({
@@ -35,6 +39,9 @@ const postSlice = createSlice({
       state.error = action.error.message
       })
       .addCase(createPost.fulfilled, (state, action) => {
+        state.status='idle'
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
         state.status='idle'
       })
   }
