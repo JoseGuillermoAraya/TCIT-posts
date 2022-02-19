@@ -16,14 +16,16 @@ const PostsDisplay = (props) => {
   },[dispatch, postStatus])
   console.log(posts)
   const grid = []
-  posts.forEach(p => {
-    grid.push(<div className={`cell cell${p.id}`} key={`nom${p.id}`}>{p.nombre}</div>)
-    grid.push(<div className={`cell cell${p.id}`} key={`descr${p.id}`}>{p.descripcion}</div>)
+  posts.forEach((p,idx) => {
+    grid.push(<div className={`cell row${p.id}`} key={`name${p.id}`}>{p.nombre}</div>)
+    grid.push(<div className={`cell row${p.id}`} key={`descr${p.id}`}>{p.descripcion}</div>)
+    grid.push(<button className={`eliminarButton row${p.id}`} key={`button${p.id}`}>Eliminar</button>)
   }
 )
   return (<div className="postDisplayContainer">
     <div className="nombreTitle">Nombre</div>
     <div className="descrTitle">Descripción</div>
+    <div className="accionTitle">Acción</div>
     {grid}
   </div>)
 }
