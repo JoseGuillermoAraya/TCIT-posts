@@ -17,8 +17,8 @@ const PostsDisplay = (props) => {
   console.log(posts)
   const grid = []
   posts.forEach(p => {
-    grid.push(<div>{p.nombre}</div>)
-    grid.push(<div>{p.descripcion}</div>)
+    grid.push(<div className={`cell cell${p.id}`} key={`nom${p.id}`}>{p.nombre}</div>)
+    grid.push(<div className={`cell cell${p.id}`} key={`descr${p.id}`}>{p.descripcion}</div>)
   }
 )
   return (<div className="postDisplayContainer">
