@@ -8,7 +8,8 @@ const PostsDisplay = (props) => {
   const dispatch = useDispatch()
   const postStatus = useSelector(state => state.posts.status)
   const posts = useSelector(selectAllPosts)
-
+  const filter = useSelector(state => state.filter.filter)
+  
   useEffect(() => {
     if (postStatus === 'idle') {
       dispatch(fetchPosts())
@@ -16,7 +17,7 @@ const PostsDisplay = (props) => {
   },[dispatch, postStatus])
   console.log(posts)
   const grid = []
-  posts.forEach((p,idx) => {
+  posts.filter(p => p.nombre.includes(filter)).forEach((p) => {
     grid.push(<div className={`cell row${p.id}`} key={`name${p.id}`}>{p.nombre}</div>)
     grid.push(<div className={`cell row${p.id}`} key={`descr${p.id}`}>{p.descripcion}</div>)
     grid.push(<button className={`eliminarButton row${p.id}`} key={`button${p.id}`} onClick={()=>dispatch(deletePost({id:p.id}))}>Eliminar</button>)
