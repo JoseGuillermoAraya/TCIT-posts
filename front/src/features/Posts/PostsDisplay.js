@@ -22,6 +22,8 @@ const PostsDisplay = (props) => {
   }
 )
   return (<div className="postDisplayContainer">
+    <div className="nombreTitle">Nombre</div>
+    <div className="descrTitle">Descripción</div>
     {grid}
   </div>)
 }
