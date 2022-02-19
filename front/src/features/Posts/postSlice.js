@@ -5,10 +5,14 @@ const initialState = {
   status: 'idle',
   error: null,
 }
-const apiPath = 'http://localhost:3001'
+const apiPath = 'http://localhost:3001/posts'
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await fetch(`${apiPath}/posts`)
+  const response = await fetch(apiPath)
   return response.json()
+})
+export const createPost = createAsyncThunk('posts/createPost', async (body) => {
+  const response = await fetch(apiPath, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body })
+  return response.json();
 })
 export const selectAllPosts = state => state.posts.posts
 
@@ -29,6 +33,7 @@ const postSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
       })
+      .addCase(createPost.fulfilled, (state, action) => {})
   }
 })
 
